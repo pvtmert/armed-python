@@ -1,13 +1,14 @@
 #!/usr/bin/env docker build --compress -t pvtmert/python -f
 
-FROM pvtmert/gcc-arm:gnueabi
+FROM arm32v5/debian:stable
 
 ENV version=3.5.3
 
-RUN apt update && \
-	apt install -y python3-dev:armel zlib1g-dev:armel \
-	libz-dev:armel libcrypto++-dev:armel libssl-dev:armel \
-	libreadline-dev:armel libreadline5:armel libc-dev:armel libc6-dev:armel \
+RUN apt update && apt install -y \
+	build-essential zip unzip nano \
+	python3-dev zlib1g-dev \
+	libz-dev libcrypto++-dev libssl-dev \
+	libreadline-dev libreadline5 libc-dev libc6-dev \
 	&& apt clean
 
 ADD https://www.python.org/ftp/python/${version}/Python-${version}.tar.xz /
